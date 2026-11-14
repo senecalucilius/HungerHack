@@ -1,52 +1,614 @@
+
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#F7F3ED">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#F7F3ED">
 <title>Admin HungerHack</title>
 <style>
-:root{--bg:#F7F3ED;--paper:#fff;--red:#B64B36;--brown:#684A3A;--beige:#E8DCCB;--olive:#65735A;--ink:#382B25;--muted:#76685D;--line:#E7DED3;--blue:#2563EB}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{max-width:1120px;margin:auto;padding:24px 18px 50px}.serif{font-family:Georgia,'Times New Roman',serif}.top{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 0 22px;border-bottom:1px solid var(--line)}h1{font: bold 30px Georgia,serif;color:var(--brown);margin:0}.brand span{color:var(--red)}.muted{color:var(--muted);font-size:13px;line-height:1.5}.card{background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:20px;margin-top:20px;box-shadow:0 10px 28px rgba(72,48,34,.05)}h2{font:normal 23px Georgia,serif;color:var(--brown);margin:0 0 14px}.field{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);outline:none}.field:focus{border-color:var(--red);box-shadow:0 0 0 3px #B64B361A}.group{display:grid;gap:6px;margin:11px 0}.group label{font-size:12px;font-weight:700;color:var(--brown)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}.btn{border:0;border-radius:999px;padding:11px 17px;font-weight:700;background:var(--red);color:#fff}.btn.secondary{background:var(--olive)}.btn.light{background:var(--beige);color:var(--brown)}.btn.danger{background:#8D3026}.btn:disabled{opacity:.55;cursor:not-allowed}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.hidden{display:none!important}.status{padding:11px 13px;border-radius:10px;background:#F1E8DC;color:var(--brown);font-size:13px;line-height:1.5;margin-top:12px;white-space:pre-wrap}.status.error{background:#FCE8E6;color:#8D3026}.status.success{background:#EAF2E6;color:#365A32}.toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}.toolbar input{max-width:330px}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:700px}th,td{text-align:left;padding:12px 9px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:middle}th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5px}td strong{color:var(--brown)}.pill{display:inline-block;border-radius:99px;padding:5px 8px;background:#EDF0E9;color:var(--olive);font-size:11px}.pill.off{background:#F3E6E3;color:#9A493C}.thumb{width:54px;height:44px;object-fit:cover;border-radius:8px;background:#F0E9DF}.smallbtn{border:1px solid var(--line);background:white;color:var(--brown);border-radius:8px;padding:7px 10px;font-size:12px;font-weight:700}.checkline{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--brown);margin:10px 0}.checkline input{accent-color:var(--red)}.preview{width:100%;max-width:180px;max-height:130px;object-fit:cover;border-radius:10px;background:#F0E9DF}.loginbox{max-width:430px;margin:45px auto}.note{font-size:11px;color:var(--muted);line-height:1.5}.headright{display:flex;align-items:center;gap:12px}.useremail{font-size:12px;color:var(--muted)}
-@media(max-width:650px){.wrap{padding:16px 12px 40px}.card{padding:15px;margin-top:14px}h1{font-size:25px}.grid2,.grid3{grid-template-columns:1fr}.top{align-items:flex-start}.headright{flex-direction:column;align-items:flex-end}.toolbar{align-items:stretch}.toolbar input{max-width:none;width:100%}}
+:root{--bg:#F7F3ED;--paper:#fff;--red:#B64B36;--brown:#684A3A;--beige:#E8DCCB;--olive:#65735A;--ink:#382B25;--muted:#76685D;--line:#E7DED3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.wrap{max-width:1120px;margin:auto;padding:24px 18px 50px}
+.serif{font-family:Georgia,'Times New Roman',serif}
+.top{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 0 22px;border-bottom:1px solid var(--line)}
+h1{font:bold 30px Georgia,serif;color:var(--brown);margin:0}
+.brand span{color:var(--red)}
+.muted{color:var(--muted);font-size:13px;line-height:1.5}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:20px;margin-top:20px;box-shadow:0 10px 28px rgba(72,48,34,.05)}
+h2{font:normal 23px Georgia,serif;color:var(--brown);margin:0 0 14px}
+.field{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);outline:none}
+.field:focus{border-color:var(--red);box-shadow:0 0 0 3px #B64B361A}
+.group{display:grid;gap:6px;margin:11px 0}
+.group label{font-size:12px;font-weight:700;color:var(--brown)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
+.btn{border:0;border-radius:999px;padding:11px 17px;font-weight:700;background:var(--red);color:#fff}
+.btn.secondary{background:var(--olive)}
+.btn.light{background:var(--beige);color:var(--brown)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.hidden{display:none!important}
+.status{padding:11px 13px;border-radius:10px;background:#F1E8DC;color:var(--brown);font-size:13px;line-height:1.5;margin-top:12px;white-space:pre-wrap}
+.status.error{background:#FCE8E6;color:#8D3026}
+.status.success{background:#EAF2E6;color:#365A32}
+.toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
+.toolbar input{max-width:330px}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:700px}
+th,td{text-align:left;padding:12px 9px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:middle}
+th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+td strong{color:var(--brown)}
+.pill{display:inline-block;border-radius:99px;padding:5px 8px;background:#EDF0E9;color:var(--olive);font-size:11px}
+.pill.off{background:#F3E6E3;color:#9A493C}
+.thumb{width:54px;height:44px;object-fit:cover;border-radius:8px;background:#F0E9DF}
+.smallbtn{border:1px solid var(--line);background:white;color:var(--brown);border-radius:8px;padding:7px 10px;font-size:12px;font-weight:700}
+.checkline{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--brown);margin:10px 0}
+.checkline input{accent-color:var(--red)}
+.preview{width:100%;max-width:240px;max-height:170px;object-fit:cover;border-radius:10px;background:#F0E9DF;margin-top:8px}
+.loginbox{max-width:430px;margin:45px auto}
+.note{font-size:11px;color:var(--muted);line-height:1.5}
+.headright{display:flex;align-items:center;gap:12px}
+.useremail{font-size:12px;color:var(--muted)}
+@media(max-width:650px){
+.wrap{padding:16px 12px 40px}
+.card{padding:15px;margin-top:14px}
+h1{font-size:25px}
+.grid2,.grid3{grid-template-columns:1fr}
+.top{align-items:flex-start}
+.headright{flex-direction:column;align-items:flex-end}
+.toolbar{align-items:stretch}
+.toolbar input{max-width:none;width:100%}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header class="top"><div><h1 class="brand">Hunger<span>Hack</span> Admin</h1><div class="muted">Kelola menu dan foto makanan</div></div><div class="headright"><span class="useremail" id="userEmail"></span><button class="btn light hidden" id="logoutBtn" onclick="logout()">Keluar</button></div></header>
-<section class="card loginbox" id="loginCard"><h2>Login admin</h2><p class="muted">Masuk menggunakan email dan password akun admin Supabase.</p><form id="loginForm"><div class="group"><label for="email">Email</label><input class="field" id="email" type="email" autocomplete="username" required></div><div class="group"><label for="password">Password</label><input class="field" id="password" type="password" autocomplete="current-password" required></div><button class="btn" type="submit" id="loginBtn">Masuk</button></form><div id="loginStatus" class="status hidden"></div></section>
+<header class="top">
+  <div>
+    <h1 class="brand">Hunger<span>Hack</span> Admin</h1>
+    <div class="muted">Kelola menu, foto makanan, dan tampilan homepage</div>
+  </div>
+  <div class="headright">
+    <span class="useremail" id="userEmail"></span>
+    <button class="btn light hidden" id="logoutBtn" onclick="logout()">Keluar</button>
+  </div>
+</header>
+
+<section class="card loginbox" id="loginCard">
+  <h2>Login admin</h2>
+  <p class="muted">Masuk menggunakan email dan password akun admin Supabase.</p>
+  <form id="loginForm">
+    <div class="group">
+      <label for="email">Email</label>
+      <input class="field" id="email" type="email" autocomplete="username" required>
+    </div>
+    <div class="group">
+      <label for="password">Password</label>
+      <input class="field" id="password" type="password" autocomplete="current-password" required>
+    </div>
+    <button class="btn" type="submit" id="loginBtn">Masuk</button>
+  </form>
+  <div id="loginStatus" class="status hidden"></div>
+</section>
+
 <main id="dashboard" class="hidden">
-<section class="card"><div class="toolbar"><div><h2 style="margin-bottom:4px">Daftar menu</h2><div class="muted">Tambah, ubah, atur ketersediaan, dan unggah foto menu.</div></div><button class="btn" onclick="newMenu()">+ Tambah menu</button></div><div class="toolbar"><input class="field" id="search" placeholder="Cari nama menu..." oninput="renderRows()"><select class="field" id="filterCategory" onchange="renderRows()" style="max-width:240px"><option value="">Semua kategori</option></select></div><div class="tablewrap"><table><thead><tr><th>Foto</th><th>Menu</th><th>Kategori</th><th>Harga</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="menuRows"><tr><td colspan="6">Memuat data...</td></tr></tbody></table></div><div id="listStatus" class="status hidden"></div></section>
-<section class="card" id="editorCard"><h2 id="editorTitle">Tambah menu</h2><form id="menuForm"><input type="hidden" id="menuId"><div class="grid2"><div class="group"><label for="menuName">Nama menu</label><input class="field" id="menuName" maxlength="120" required></div><div class="group"><label for="menuCategory">Kategori</label><select class="field" id="menuCategory" required></select></div></div><div class="group"><label for="menuDescription">Deskripsi</label><textarea class="field" id="menuDescription" rows="2"></textarea></div><div class="grid3"><div class="group"><label for="menuPrice">Harga (angka, tanpa titik)</label><input class="field" id="menuPrice" type="number" min="0" step="1" required placeholder="20000"></div><div class="group"><label for="menuSort">Urutan menu</label><input class="field" id="menuSort" type="number" step="1" value="0"></div><div class="group"><label for="featuredOrder">Urutan unggulan</label><input class="field" id="featuredOrder" type="number" step="1" placeholder="Kosongkan jika bukan unggulan"></div></div><label class="checkline"><input type="checkbox" id="isAvailable" checked> Tersedia untuk dipesan</label><label class="checkline"><input type="checkbox" id="isFeatured"> Tampilkan sebagai menu unggulan</label><div class="group"><label for="photoFile">Foto menu (opsional)</label><input class="field" id="photoFile" type="file" accept="image/jpeg,image/png,image/webp"><div class="note">Format JPG, PNG, atau WebP. Foto akan diunggah ke bucket menu-photos.</div><img id="photoPreview" class="preview hidden" alt="Pratinjau foto"><div id="photoCurrent" class="note"></div></div><div class="actions"><button class="btn" type="submit" id="saveBtn">Simpan menu</button><button class="btn light" type="button" onclick="resetEditor()">Kosongkan</button></div></form><div id="editorStatus" class="status hidden"></div></section>
-<section class="card"><h2>Kategori</h2><p class="muted">Kategori yang tersedia saat ini digunakan sebagai pilihan pada formulir menu. Jangan menghapus kategori yang masih dipakai oleh menu.</p><form id="categoryForm"><div class="grid2"><div class="group"><label for="categoryName">Nama kategori baru</label><input class="field" id="categoryName" required maxlength="60" placeholder="Contoh: Camilan"></div><div class="group"><label for="categorySort">Urutan kategori</label><input class="field" id="categorySort" type="number" value="10" step="1"></div></div><button class="btn secondary" type="submit" id="categoryBtn">Tambah kategori</button></form><div id="categoryList" class="muted" style="margin-top:14px"></div><div id="categoryStatus" class="status hidden"></div></section>
+
+<section class="card">
+  <div class="toolbar">
+    <div>
+      <h2 style="margin-bottom:4px">Daftar menu</h2>
+      <div class="muted">Tambah, ubah, atur ketersediaan, dan unggah foto menu.</div>
+    </div>
+    <button class="btn" onclick="newMenu()">+ Tambah menu</button>
+  </div>
+  <div class="toolbar">
+    <input class="field" id="search" placeholder="Cari nama menu..." oninput="renderRows()">
+    <select class="field" id="filterCategory" onchange="renderRows()" style="max-width:240px">
+      <option value="">Semua kategori</option>
+    </select>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr><th>Foto</th><th>Menu</th><th>Kategori</th><th>Harga</th><th>Status</th><th>Aksi</th></tr>
+      </thead>
+      <tbody id="menuRows"><tr><td colspan="6">Memuat data...</td></tr></tbody>
+    </table>
+  </div>
+  <div id="listStatus" class="status hidden"></div>
+</section>
+
+<section class="card" id="editorCard">
+  <h2 id="editorTitle">Tambah menu</h2>
+  <form id="menuForm">
+    <input type="hidden" id="menuId">
+    <div class="grid2">
+      <div class="group">
+        <label for="menuName">Nama menu</label>
+        <input class="field" id="menuName" maxlength="120" required>
+      </div>
+      <div class="group">
+        <label for="menuCategory">Kategori</label>
+        <select class="field" id="menuCategory" required></select>
+      </div>
+    </div>
+    <div class="group">
+      <label for="menuDescription">Deskripsi</label>
+      <textarea class="field" id="menuDescription" rows="2"></textarea>
+    </div>
+    <div class="grid3">
+      <div class="group">
+        <label for="menuPrice">Harga (angka, tanpa titik)</label>
+        <input class="field" id="menuPrice" type="number" min="0" step="1" required placeholder="20000">
+      </div>
+      <div class="group">
+        <label for="menuSort">Urutan menu</label>
+        <input class="field" id="menuSort" type="number" step="1" value="0">
+      </div>
+      <div class="group">
+        <label for="featuredOrder">Urutan unggulan</label>
+        <input class="field" id="featuredOrder" type="number" step="1" placeholder="Kosongkan jika bukan unggulan">
+      </div>
+    </div>
+    <label class="checkline"><input type="checkbox" id="isAvailable" checked> Tersedia untuk dipesan</label>
+    <label class="checkline"><input type="checkbox" id="isFeatured"> Tampilkan sebagai menu unggulan</label>
+    <div class="group">
+      <label for="photoFile">Foto menu (opsional)</label>
+      <input class="field" id="photoFile" type="file" accept="image/jpeg,image/png,image/webp">
+      <div class="note">Format JPG, PNG, atau WebP. Foto akan diunggah ke bucket menu-photos.</div>
+      <img id="photoPreview" class="preview hidden" alt="Pratinjau foto">
+      <div id="photoCurrent" class="note"></div>
+    </div>
+    <div class="actions">
+      <button class="btn" type="submit" id="saveBtn">Simpan menu</button>
+      <button class="btn light" type="button" onclick="resetEditor()">Kosongkan</button>
+    </div>
+  </form>
+  <div id="editorStatus" class="status hidden"></div>
+</section>
+
+<section class="card">
+  <h2>Kategori</h2>
+  <p class="muted">Kategori yang tersedia saat ini digunakan sebagai pilihan pada formulir menu. Jangan menghapus kategori yang masih dipakai oleh menu.</p>
+  <form id="categoryForm">
+    <div class="grid2">
+      <div class="group">
+        <label for="categoryName">Nama kategori baru</label>
+        <input class="field" id="categoryName" required maxlength="60" placeholder="Contoh: Camilan">
+      </div>
+      <div class="group">
+        <label for="categorySort">Urutan kategori</label>
+        <input class="field" id="categorySort" type="number" value="10" step="1">
+      </div>
+    </div>
+    <button class="btn secondary" type="submit" id="categoryBtn">Tambah kategori</button>
+  </form>
+  <div id="categoryList" class="muted" style="margin-top:14px"></div>
+  <div id="categoryStatus" class="status hidden"></div>
+</section>
+
+<!-- PENGATURAN HOMEPAGE -->
+<section class="card" id="homepageSettingsCard">
+  <h2>Pengaturan Homepage</h2>
+  <p class="muted">Ubah tulisan utama dan foto besar yang tampil di halaman depan HungerHack. Perubahan tidak mengubah menu atau kategori.</p>
+
+  <form id="homepageForm">
+    <div class="group">
+      <label for="homepageTitleInput">Judul utama</label>
+      <textarea class="field" id="homepageTitleInput" rows="2" maxlength="180" required></textarea>
+    </div>
+    <div class="group">
+      <label for="homepageDescriptionInput">Deskripsi / slogan</label>
+      <textarea class="field" id="homepageDescriptionInput" rows="3" maxlength="400"></textarea>
+    </div>
+    <div class="group">
+      <label for="homepageButtonInput">Teks tombol utama</label>
+      <input class="field" id="homepageButtonInput" maxlength="50" required>
+    </div>
+    <div class="group">
+      <label for="homepagePhotoInput">Foto utama homepage</label>
+      <input class="field" id="homepagePhotoInput" type="file" accept="image/jpeg,image/png,image/webp">
+      <div class="note">Format JPG, PNG, atau WebP. Ukuran maksimal 5 MB. Foto akan diunggah ke bucket homepage-assets.</div>
+      <img id="homepagePhotoPreview" class="preview hidden" alt="Pratinjau foto homepage">
+      <div id="homepagePhotoCurrent" class="note"></div>
+    </div>
+    <div class="actions">
+      <button class="btn" type="submit" id="homepageSaveBtn">Simpan Pengaturan Homepage</button>
+    </div>
+  </form>
+  <div id="homepageStatus" class="status hidden"></div>
+</section>
+
 </main>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// Menggunakan Project URL dan Publishable Key yang sama dengan website publik.
 const SUPABASE_URL = "https://ixmzbntofcyuekdlrzzn.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_7TRo870R1s_6Fd0DgCxkUA_bBNIjEHD";
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
 let categories = [], menuItems = [];
+let homepageImageUrl = "";
+
 const $ = id => document.getElementById(id);
 const money = n => "Rp" + Number(n || 0).toLocaleString("id-ID");
-function showStatus(id, message, type="") { const el=$(id); el.textContent=message; el.className="status"+(type?" "+type:""); el.classList.remove("hidden"); }
+
+function showStatus(id,message,type=""){
+  const el=$(id);
+  el.textContent=message;
+  el.className="status"+(type?" "+type:"");
+  el.classList.remove("hidden");
+}
 function hideStatus(id){$(id).classList.add("hidden");}
-function slugify(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");}
-function safeImage(url){try{const u=new URL(url);return u.protocol==="https:"?u.href:""}catch(e){return ""}}
-function setLoggedIn(session){const yes=!!session;$ ("loginCard").classList.toggle("hidden",yes);$("dashboard").classList.toggle("hidden",!yes);$("logoutBtn").classList.toggle("hidden",!yes);$("userEmail").textContent=session?.user?.email||"";if(yes)loadAll();}
-async function login(e){e.preventDefault();hideStatus("loginStatus");$("loginBtn").disabled=true;$("loginBtn").textContent="Memeriksa...";try{const {data,error}=await db.auth.signInWithPassword({email:$ ("email").value.trim(),password:$ ("password").value});if(error)throw error;setLoggedIn(data.session);}catch(err){showStatus("loginStatus",err.message||"Login gagal.","error");}finally{$("loginBtn").disabled=false;$("loginBtn").textContent="Masuk";}}
-async function logout(){await db.auth.signOut();setLoggedIn(null);}
-async function loadAll(){showStatus("listStatus","Memuat data...");try{const [c,m]=await Promise.all([db.from("categories").select("id,name,slug,sort_order,is_active").order("sort_order"),db.from("menu_items").select("id,category_id,name,description,price,photo_url,is_available,is_featured,featured_order,sort_order").order("sort_order")]);if(c.error)throw c.error;if(m.error)throw m.error;categories=c.data||[];menuItems=m.data||[];renderCategoryOptions();renderCategoryList();renderRows();hideStatus("listStatus");}catch(err){showStatus("listStatus","Gagal memuat data: "+(err.message||err)+". Periksa izin database (GRANT) dan kebijakan RLS.","error");}}
-function renderCategoryOptions(){const active=categories.filter(c=>c.is_active);$("menuCategory").innerHTML=active.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");$("filterCategory").innerHTML='<option value="">Semua kategori</option>'+categories.map(c=>`<option value="${c.id}">${esc(c.name)}${c.is_active?"":" (nonaktif)"}</option>`).join("");}
-function renderCategoryList(){$("categoryList").innerHTML=categories.map(c=>`<div style="padding:8px 0;border-bottom:1px solid var(--line)"><strong>${esc(c.name)}</strong> <span class="pill">${esc(c.slug)}</span> <span class="pill ${c.is_active?"":"off"}">${c.is_active?"Aktif":"Nonaktif"}</span></div>`).join("")||"Belum ada kategori.";}
-function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function renderRows(){const q=$("search").value.trim().toLowerCase(),cat=$("filterCategory").value;const rows=menuItems.filter(m=>(!cat||m.category_id===cat)&&m.name.toLowerCase().includes(q));$("menuRows").innerHTML=rows.length?rows.map(m=>{const c=categories.find(x=>x.id===m.category_id);const img=safeImage(m.photo_url);return `<tr><td>${img?`<img class="thumb" src="${esc(img)}" alt="">`:'<div class="thumb"></div>'}</td><td><strong>${esc(m.name)}</strong><div class="note">${m.is_featured?"Menu unggulan · ":""}${esc(m.description||"")}</div></td><td>${esc(c?.name||"Kategori tidak ditemukan")}</td><td>${money(m.price)}</td><td><span class="pill ${m.is_available?"":"off"}">${m.is_available?"Tersedia":"Habis / nonaktif"}</span></td><td><button class="smallbtn" onclick="editMenu('${m.id}')">Edit</button> <button class="smallbtn" onclick="toggleAvailability('${m.id}')">${m.is_available?"Nonaktifkan":"Aktifkan"}</button></td></tr>`}).join(""):'<tr><td colspan="6" class="muted">Tidak ada menu yang cocok.</td></tr>';}
-function newMenu(){resetEditor();$("editorCard").scrollIntoView({behavior:"smooth",block:"start"});}
-function resetEditor(){$("menuForm").reset();$("menuId").value="";$("menuSort").value="0";$("isAvailable").checked=true;$("photoPreview").classList.add("hidden");$("photoCurrent").textContent="";$("editorTitle").textContent="Tambah menu";$("saveBtn").textContent="Simpan menu";hideStatus("editorStatus");}
-function editMenu(id){const m=menuItems.find(x=>x.id===id);if(!m)return;$("menuId").value=m.id;$("menuName").value=m.name;$("menuCategory").value=m.category_id;$("menuDescription").value=m.description||"";$("menuPrice").value=m.price;$("menuSort").value=m.sort_order??0;$("featuredOrder").value=m.featured_order??"";$("isAvailable").checked=!!m.is_available;$("isFeatured").checked=!!m.is_featured;$("photoFile").value="";$("photoPreview").classList.add("hidden");$("photoCurrent").textContent=m.photo_url?"Foto saat ini tersimpan. Unggah foto baru untuk menggantinya.":"Belum ada foto.";$("editorTitle").textContent="Edit menu";$("saveBtn").textContent="Simpan perubahan";hideStatus("editorStatus");$("editorCard").scrollIntoView({behavior:"smooth",block:"start"});}
-async function uploadPhoto(file){if(!file)return null;if(!["image/jpeg","image/png","image/webp"].includes(file.type))throw new Error("Gunakan foto JPG, PNG, atau WebP.");if(file.size>5*1024*1024)throw new Error("Ukuran foto maksimal 5 MB.");const ext=file.name.split(".").pop().toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";const path=`menu/${crypto.randomUUID()}.${ext}`;const {error}=await db.storage.from("menu-photos").upload(path,file,{cacheControl:"3600",upsert:false,contentType:file.type});if(error)throw error;const {data}=db.storage.from("menu-photos").getPublicUrl(path);return data.publicUrl;}
-async function saveMenu(e){e.preventDefault();hideStatus("editorStatus");const id=$("menuId").value;const name=$("menuName").value.trim();const category_id=$("menuCategory").value;const price=Number($("menuPrice").value);if(!name||!category_id||!Number.isFinite(price)||price<0){showStatus("editorStatus","Nama, kategori, dan harga harus diisi dengan benar.","error");return;}const featured=$("isFeatured").checked;const payload={name,category_id,description:$("menuDescription").value.trim(),price,is_available:$("isAvailable").checked,is_featured:featured,featured_order:featured?(Number($("featuredOrder").value)||1):null,sort_order:Number($("menuSort").value)||0};$("saveBtn").disabled=true;$("saveBtn").textContent="Menyimpan...";try{const file=$("photoFile").files[0];if(file)payload.photo_url=await uploadPhoto(file);let result=id?await db.from("menu_items").update(payload).eq("id",id):await db.from("menu_items").insert(payload);if(result.error)throw result.error;showStatus("editorStatus","Menu berhasil disimpan.","success");resetEditor();await loadAll();}catch(err){showStatus("editorStatus","Gagal menyimpan: "+(err.message||err)+". Periksa GRANT, RLS, dan bucket menu-photos.","error");}finally{$("saveBtn").disabled=false;$("saveBtn").textContent=id?"Simpan perubahan":"Simpan menu";}}
-async function toggleAvailability(id){const m=menuItems.find(x=>x.id===id);if(!m)return;const {error}=await db.from("menu_items").update({is_available:!m.is_available}).eq("id",id);if(error){showStatus("listStatus","Gagal mengubah status: "+error.message,"error");return;}await loadAll();}
-async function addCategory(e){e.preventDefault();hideStatus("categoryStatus");const name=$("categoryName").value.trim();const slug=slugify(name);if(!slug){showStatus("categoryStatus","Nama kategori tidak valid.","error");return;}$("categoryBtn").disabled=true;try{const {error}=await db.from("categories").insert({name,slug,sort_order:Number($("categorySort").value)||0,is_active:true});if(error)throw error;$("categoryForm").reset();$("categorySort").value="10";showStatus("categoryStatus","Kategori berhasil ditambahkan.","success");await loadAll();}catch(err){showStatus("categoryStatus","Gagal menambah kategori: "+(err.message||err),"error");}finally{$("categoryBtn").disabled=false;}}
-$("loginForm").addEventListener("submit",login);$("menuForm").addEventListener("submit",saveMenu);$("categoryForm").addEventListener("submit",addCategory);$("photoFile").addEventListener("change",()=>{const f=$("photoFile").files[0];if(!f){$("photoPreview").classList.add("hidden");return;}$("photoPreview").src=URL.createObjectURL(f);$("photoPreview").classList.remove("hidden");});
-db.auth.getSession().then(({data})=>setLoggedIn(data.session));db.auth.onAuthStateChange((_event,session)=>{if(!session){$("dashboard").classList.add("hidden");$("logoutBtn").classList.add("hidden");$("loginCard").classList.remove("hidden");$("userEmail").textContent="";}});
+function slugify(s){
+  return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+}
+function safeImage(url){
+  try{
+    const u=new URL(url);
+    return u.protocol==="https:"?u.href:"";
+  }catch(e){return "";}
+}
+function esc(v){
+  return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+function setLoggedIn(session){
+  const yes=!!session;
+  $("loginCard").classList.toggle("hidden",yes);
+  $("dashboard").classList.toggle("hidden",!yes);
+  $("logoutBtn").classList.toggle("hidden",!yes);
+  $("userEmail").textContent=session?.user?.email||"";
+  if(yes)loadAll();
+}
+
+async function login(e){
+  e.preventDefault();
+  hideStatus("loginStatus");
+  $("loginBtn").disabled=true;
+  $("loginBtn").textContent="Memeriksa...";
+  try{
+    const {data,error}=await db.auth.signInWithPassword({
+      email:$("email").value.trim(),
+      password:$("password").value
+    });
+    if(error)throw error;
+    setLoggedIn(data.session);
+  }catch(err){
+    showStatus("loginStatus",err.message||"Login gagal.","error");
+  }finally{
+    $("loginBtn").disabled=false;
+    $("loginBtn").textContent="Masuk";
+  }
+}
+
+async function logout(){
+  await db.auth.signOut();
+  setLoggedIn(null);
+}
+
+async function loadAll(){
+  showStatus("listStatus","Memuat data...");
+  const results=await Promise.allSettled([
+    db.from("categories").select("id,name,slug,sort_order,is_active").order("sort_order"),
+    db.from("menu_items").select("id,category_id,name,description,price,photo_url,is_available,is_featured,featured_order,sort_order").order("sort_order")
+  ]);
+  try{
+    if(results[0].status==="rejected")throw results[0].reason;
+    if(results[1].status==="rejected")throw results[1].reason;
+    const c=results[0].value,m=results[1].value;
+    if(c.error)throw c.error;
+    if(m.error)throw m.error;
+    categories=c.data||[];
+    menuItems=m.data||[];
+    renderCategoryOptions();
+    renderCategoryList();
+    renderRows();
+    hideStatus("listStatus");
+  }catch(err){
+    showStatus("listStatus","Gagal memuat data: "+(err.message||err)+". Periksa izin database dan kebijakan RLS.","error");
+  }
+  await loadHomepageSettings();
+}
+
+function renderCategoryOptions(){
+  const active=categories.filter(c=>c.is_active);
+  $("menuCategory").innerHTML=active.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");
+  $("filterCategory").innerHTML='<option value="">Semua kategori</option>'+categories.map(c=>`<option value="${c.id}">${esc(c.name)}${c.is_active?"":" (nonaktif)"}</option>`).join("");
+}
+
+function renderCategoryList(){
+  $("categoryList").innerHTML=categories.map(c=>`<div style="padding:8px 0;border-bottom:1px solid var(--line)"><strong>${esc(c.name)}</strong> <span class="pill">${esc(c.slug)}</span> <span class="pill ${c.is_active?"":"off"}">${c.is_active?"Aktif":"Nonaktif"}</span></div>`).join("")||"Belum ada kategori.";
+}
+
+function renderRows(){
+  const q=$("search").value.trim().toLowerCase();
+  const cat=$("filterCategory").value;
+  const rows=menuItems.filter(m=>(!cat||m.category_id===cat)&&m.name.toLowerCase().includes(q));
+  $("menuRows").innerHTML=rows.length?rows.map(m=>{
+    const c=categories.find(x=>x.id===m.category_id);
+    const img=safeImage(m.photo_url);
+    return `<tr><td>${img?`<img class="thumb" src="${esc(img)}" alt="">`:'<div class="thumb"></div>'}</td><td><strong>${esc(m.name)}</strong><div class="note">${m.is_featured?"Menu unggulan · ":""}${esc(m.description||"")}</div></td><td>${esc(c?.name||"Kategori tidak ditemukan")}</td><td>${money(m.price)}</td><td><span class="pill ${m.is_available?"":"off"}">${m.is_available?"Tersedia":"Habis / nonaktif"}</span></td><td><button class="smallbtn" onclick="editMenu('${m.id}')">Edit</button> <button class="smallbtn" onclick="toggleAvailability('${m.id}')">${m.is_available?"Nonaktifkan":"Aktifkan"}</button></td></tr>`;
+  }).join(""):'<tr><td colspan="6" class="muted">Tidak ada menu yang cocok.</td></tr>';
+}
+
+function newMenu(){
+  resetEditor();
+  $("editorCard").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function resetEditor(){
+  $("menuForm").reset();
+  $("menuId").value="";
+  $("menuSort").value="0";
+  $("isAvailable").checked=true;
+  $("photoPreview").classList.add("hidden");
+  $("photoCurrent").textContent="";
+  $("editorTitle").textContent="Tambah menu";
+  $("saveBtn").textContent="Simpan menu";
+  hideStatus("editorStatus");
+}
+function editMenu(id){
+  const m=menuItems.find(x=>x.id===id);
+  if(!m)return;
+  $("menuId").value=m.id;
+  $("menuName").value=m.name;
+  $("menuCategory").value=m.category_id;
+  $("menuDescription").value=m.description||"";
+  $("menuPrice").value=m.price;
+  $("menuSort").value=m.sort_order??0;
+  $("featuredOrder").value=m.featured_order??"";
+  $("isAvailable").checked=!!m.is_available;
+  $("isFeatured").checked=!!m.is_featured;
+  $("photoFile").value="";
+  $("photoPreview").classList.add("hidden");
+  $("photoCurrent").textContent=m.photo_url?"Foto saat ini tersimpan. Unggah foto baru untuk menggantinya.":"Belum ada foto.";
+  $("editorTitle").textContent="Edit menu";
+  $("saveBtn").textContent="Simpan perubahan";
+  hideStatus("editorStatus");
+  $("editorCard").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+async function uploadPhoto(file){
+  if(!file)return null;
+  if(!["image/jpeg","image/png","image/webp"].includes(file.type))throw new Error("Gunakan foto JPG, PNG, atau WebP.");
+  if(file.size>5*1024*1024)throw new Error("Ukuran foto maksimal 5 MB.");
+  const ext=file.name.split(".").pop().toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";
+  const path=`menu/${crypto.randomUUID()}.${ext}`;
+  const {error}=await db.storage.from("menu-photos").upload(path,file,{cacheControl:"3600",upsert:false,contentType:file.type});
+  if(error)throw error;
+  const {data}=db.storage.from("menu-photos").getPublicUrl(path);
+  return data.publicUrl;
+}
+
+async function saveMenu(e){
+  e.preventDefault();
+  hideStatus("editorStatus");
+  const id=$("menuId").value;
+  const name=$("menuName").value.trim();
+  const category_id=$("menuCategory").value;
+  const price=Number($("menuPrice").value);
+  if(!name||!category_id||!Number.isFinite(price)||price<0){
+    showStatus("editorStatus","Nama, kategori, dan harga harus diisi dengan benar.","error");
+    return;
+  }
+  const featured=$("isFeatured").checked;
+  const payload={
+    name,category_id,description:$("menuDescription").value.trim(),price,
+    is_available:$("isAvailable").checked,is_featured:featured,
+    featured_order:featured?(Number($("featuredOrder").value)||1):null,
+    sort_order:Number($("menuSort").value)||0
+  };
+  $("saveBtn").disabled=true;
+  $("saveBtn").textContent="Menyimpan...";
+  try{
+    const file=$("photoFile").files[0];
+    if(file)payload.photo_url=await uploadPhoto(file);
+    const result=id?await db.from("menu_items").update(payload).eq("id",id):await db.from("menu_items").insert(payload);
+    if(result.error)throw result.error;
+    showStatus("editorStatus","Menu berhasil disimpan.","success");
+    resetEditor();
+    await loadAll();
+  }catch(err){
+    showStatus("editorStatus","Gagal menyimpan: "+(err.message||err)+". Periksa GRANT, RLS, dan bucket menu-photos.","error");
+  }finally{
+    $("saveBtn").disabled=false;
+    $("saveBtn").textContent=id?"Simpan perubahan":"Simpan menu";
+  }
+}
+
+async function toggleAvailability(id){
+  const m=menuItems.find(x=>x.id===id);
+  if(!m)return;
+  const {error}=await db.from("menu_items").update({is_available:!m.is_available}).eq("id",id);
+  if(error){
+    showStatus("listStatus","Gagal mengubah status: "+error.message,"error");
+    return;
+  }
+  await loadAll();
+}
+
+async function addCategory(e){
+  e.preventDefault();
+  hideStatus("categoryStatus");
+  const name=$("categoryName").value.trim();
+  const slug=slugify(name);
+  if(!slug){
+    showStatus("categoryStatus","Nama kategori tidak valid.","error");
+    return;
+  }
+  $("categoryBtn").disabled=true;
+  try{
+    const {error}=await db.from("categories").insert({
+      name,slug,sort_order:Number($("categorySort").value)||0,is_active:true
+    });
+    if(error)throw error;
+    $("categoryForm").reset();
+    $("categorySort").value="10";
+    showStatus("categoryStatus","Kategori berhasil ditambahkan.","success");
+    await loadAll();
+  }catch(err){
+    showStatus("categoryStatus","Gagal menambah kategori: "+(err.message||err),"error");
+  }finally{
+    $("categoryBtn").disabled=false;
+  }
+}
+
+/* PENGATURAN HOMEPAGE */
+
+async function loadHomepageSettings(){
+  hideStatus("homepageStatus");
+  try{
+    const {data,error}=await db.from("site_settings")
+      .select("hero_title,hero_description,hero_button_text,hero_image_url")
+      .eq("id","homepage")
+      .maybeSingle();
+    if(error)throw error;
+    if(!data)throw new Error("Pengaturan homepage dengan ID homepage belum ditemukan.");
+
+    $("homepageTitleInput").value=data.hero_title||"Hangat dari dapur kami, sampai ke mejamu.";
+    $("homepageDescriptionInput").value=data.hero_description||"Pilih menu favoritmu, atur pesanan, lalu kirim langsung melalui WhatsApp.";
+    $("homepageButtonInput").value=data.hero_button_text||"Lihat menu";
+
+    homepageImageUrl=safeImage(data.hero_image_url||"");
+    if(homepageImageUrl){
+      $("homepagePhotoPreview").src=homepageImageUrl;
+      $("homepagePhotoPreview").classList.remove("hidden");
+      $("homepagePhotoCurrent").textContent="Foto utama saat ini. Pilih foto baru jika ingin menggantinya.";
+    }else{
+      $("homepagePhotoPreview").classList.add("hidden");
+      $("homepagePhotoCurrent").textContent="Belum ada foto utama yang diunggah.";
+    }
+  }catch(err){
+    showStatus("homepageStatus","Gagal memuat pengaturan homepage: "+(err.message||err),"error");
+  }
+}
+
+async function uploadHomepagePhoto(file){
+  if(!file)return null;
+  if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
+    throw new Error("Gunakan foto JPG, PNG, atau WebP.");
+  }
+  if(file.size>5*1024*1024){
+    throw new Error("Ukuran foto maksimal 5 MB.");
+  }
+  const ext=file.name.split(".").pop().toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";
+  const path=`homepage/${crypto.randomUUID()}.${ext}`;
+  const {error}=await db.storage.from("homepage-assets").upload(path,file,{
+    cacheControl:"3600",upsert:false,contentType:file.type
+  });
+  if(error)throw error;
+  const {data}=db.storage.from("homepage-assets").getPublicUrl(path);
+  return data.publicUrl;
+}
+
+async function saveHomepageSettings(e){
+  e.preventDefault();
+  hideStatus("homepageStatus");
+
+  const title=$("homepageTitleInput").value.trim();
+  const description=$("homepageDescriptionInput").value.trim();
+  const buttonText=$("homepageButtonInput").value.trim();
+
+  if(!title||!buttonText){
+    showStatus("homepageStatus","Judul utama dan teks tombol harus diisi.","error");
+    return;
+  }
+
+  const saveBtn=$("homepageSaveBtn");
+  saveBtn.disabled=true;
+  saveBtn.textContent="Menyimpan...";
+
+  try{
+    const file=$("homepagePhotoInput").files[0];
+    let imageUrl=homepageImageUrl;
+
+    if(file){
+      imageUrl=await uploadHomepagePhoto(file);
+    }
+
+    const {error}=await db.from("site_settings").update({
+      hero_title:title,
+      hero_description:description,
+      hero_button_text:buttonText,
+      hero_image_url:imageUrl,
+      updated_at:new Date().toISOString()
+    }).eq("id","homepage");
+
+    if(error)throw error;
+
+    homepageImageUrl=imageUrl||"";
+    $("homepagePhotoInput").value="";
+
+    if(homepageImageUrl){
+      $("homepagePhotoPreview").src=homepageImageUrl;
+      $("homepagePhotoPreview").classList.remove("hidden");
+      $("homepagePhotoCurrent").textContent="Foto utama berhasil disimpan.";
+    }else{
+      $("homepagePhotoPreview").classList.add("hidden");
+      $("homepagePhotoCurrent").textContent="Belum ada foto utama yang diunggah.";
+    }
+
+    showStatus("homepageStatus","Pengaturan homepage berhasil disimpan. Setelah index.html terhubung, perubahan akan tampil di halaman depan.","success");
+  }catch(err){
+    showStatus("homepageStatus","Gagal menyimpan pengaturan: "+(err.message||err)+". Periksa tabel site_settings, izin RLS, dan bucket homepage-assets.","error");
+  }finally{
+    saveBtn.disabled=false;
+    saveBtn.textContent="Simpan Pengaturan Homepage";
+  }
+}
+
+/* EVENT LISTENERS */
+
+$("loginForm").addEventListener("submit",login);
+$("menuForm").addEventListener("submit",saveMenu);
+$("categoryForm").addEventListener("submit",addCategory);
+$("homepageForm").addEventListener("submit",saveHomepageSettings);
+
+$("photoFile").addEventListener("change",()=>{
+  const f=$("photoFile").files[0];
+  if(!f){
+    $("photoPreview").classList.add("hidden");
+    return;
+  }
+  $("photoPreview").src=URL.createObjectURL(f);
+  $("photoPreview").classList.remove("hidden");
+});
+
+$("homepagePhotoInput").addEventListener("change",()=>{
+  const f=$("homepagePhotoInput").files[0];
+  if(!f){
+    if(homepageImageUrl){
+      $("homepagePhotoPreview").src=homepageImageUrl;
+      $("homepagePhotoPreview").classList.remove("hidden");
+    }else{
+      $("homepagePhotoPreview").classList.add("hidden");
+    }
+    return;
+  }
+  if(!["image/jpeg","image/png","image/webp"].includes(f.type)||f.size>5*1024*1024){
+    showStatus("homepageStatus","Foto harus JPG, PNG, atau WebP dan maksimal 5 MB.","error");
+    $("homepagePhotoInput").value="";
+    return;
+  }
+  $("homepagePhotoPreview").src=URL.createObjectURL(f);
+  $("homepagePhotoPreview").classList.remove("hidden");
+  $("homepagePhotoCurrent").textContent="Pratinjau foto baru. Tekan Simpan Pengaturan Homepage untuk mengunggahnya.";
+});
+
+db.auth.getSession().then(({data})=>setLoggedIn(data.session));
+db.auth.onAuthStateChange((_event,session)=>{
+  if(!session){
+    $("dashboard").classList.add("hidden");
+    $("logoutBtn").classList.add("hidden");
+    $("loginCard").classList.remove("hidden");
+    $("userEmail").textContent="";
+  }
+});
 </script>
-</body></html>
+</body>
+</html>
